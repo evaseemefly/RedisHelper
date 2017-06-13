@@ -11,7 +11,8 @@ namespace RedisHelper
     {
         static void Main(string[] args)
         {
-            StringRWTest(10000);
+            String_WriteTest(1000);
+            String_ReadTest(1000);
             //StringRWbyThread(10000);
             Console.ReadLine();
         }       
@@ -20,7 +21,7 @@ namespace RedisHelper
         /// 测试单线程反复写入1w次35s
         /// </summary>
         /// <param name="count"></param>
-        static void StringRWTest(int count)
+        static void String_WriteTest(int count)
         {
             //Common.Redis.StringRedisHelper redisHelper = new Common.Redis.StringRedisHelper();
             Common.StringReidsHelper_test stringHelper = new Common.StringReidsHelper_test();
@@ -28,10 +29,22 @@ namespace RedisHelper
             {
                 //Random random = new Random();                
                 //redisHelper.Set(random.Next().ToString(), "1", DateTime.Now.AddSeconds(10));
-                stringHelper.Set(i.ToString(), "ok", DateTime.Now.AddSeconds(10));
+                stringHelper.Set(i.ToString(), "ok", DateTime.Now.AddSeconds(120));
                 Console.WriteLine(i + ":" + "ok");
             }
 
+        }
+
+        static void String_ReadTest(int count)
+        {
+            Common.StringReidsHelper_test stringHelper = new Common.StringReidsHelper_test();
+            for (int i = 0; i < count; i++)
+            {
+                //Random random = new Random();                
+                //redisHelper.Set(random.Next().ToString(), "1", DateTime.Now.AddSeconds(10));
+              var result=  stringHelper.Get(i.ToString());
+                Console.WriteLine("取出第"+i.ToString()+":"+result + "" + "成功");
+            }
         }
 
         /// <summary>

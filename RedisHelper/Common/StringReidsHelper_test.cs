@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RedisHelper.Common
 {
-    public class StringReidsHelper_test
+    public class StringReidsHelper_test:BaseRedisOperatHelper
     {
         #region 赋值
         /// <summary>
@@ -14,14 +14,14 @@ namespace RedisHelper.Common
         /// </summary>
         public bool Set(string key, string value)
         {
-            return BaseRedisOperatHelper.redis_client.Set<string>(key, value);
+            return redis_client.Set<string>(key, value);
         }
         /// <summary>
         /// 设置key的value并设置过期时间
         /// </summary>
         public bool Set(string key, string value, DateTime dt)
         {
-            var client = BaseRedisOperatHelper.redis_client;
+            var client = redis_client;
             return client.Set<string>(key, value, dt);
             //return BaseRedisOperatHelper.redis_client.Set<string>(key, value, dt);
             
@@ -31,14 +31,14 @@ namespace RedisHelper.Common
         /// </summary>
         public bool Set(string key, string value, TimeSpan sp)
         {
-            return BaseRedisOperatHelper.redis_client.Set<string>(key, value, sp);
+            return redis_client.Set<string>(key, value, sp);
         }
         /// <summary>
         /// 设置多个key/value
         /// </summary>
         public void Set(Dictionary<string, string> dic)
         {
-            BaseRedisOperatHelper.redis_client.SetAll(dic);
+            redis_client.SetAll(dic);
         }
 
         #endregion
@@ -48,7 +48,7 @@ namespace RedisHelper.Common
         /// </summary>
         public long Append(string key, string value)
         {
-            return BaseRedisOperatHelper.redis_client.AppendToValue(key, value);
+            return redis_client.AppendToValue(key, value);
         }
         #endregion
         #region 获取值
@@ -57,21 +57,21 @@ namespace RedisHelper.Common
         /// </summary>
         public string Get(string key)
         {
-            return BaseRedisOperatHelper.redis_client.GetValue(key);
+            return redis_client.GetValue(key);
         }
         /// <summary>
         /// 获取多个key的value值
         /// </summary>
         public List<string> Get(List<string> keys)
         {
-            return BaseRedisOperatHelper.redis_client.GetValues(keys);
+            return redis_client.GetValues(keys);
         }
         /// <summary>
         /// 获取多个key的value值
         /// </summary>
         public List<T> Get<T>(List<string> keys)
         {
-            return BaseRedisOperatHelper.redis_client.GetValues<T>(keys);
+            return redis_client.GetValues<T>(keys);
         }
         #endregion
 
@@ -80,21 +80,21 @@ namespace RedisHelper.Common
         /// </summary>
         public long Incr(string key)
         {
-            return BaseRedisOperatHelper.redis_client.IncrementValue(key);
+            return redis_client.IncrementValue(key);
         }
         /// <summary>
         /// 自增count，返回自增后的值
         /// </summary>
         public double IncrBy(string key, int count)
         {
-            return BaseRedisOperatHelper.redis_client.IncrementValueBy(key, count);
+            return redis_client.IncrementValueBy(key, count);
         }
         /// <summary>
         /// 自减1，返回自减后的值
         /// </summary>
         public long Decr(string key)
         {
-            return BaseRedisOperatHelper.redis_client.DecrementValue(key);
+            return redis_client.DecrementValue(key);
         }
         /// <summary>
         /// 自减count ，返回自减后的值
@@ -104,7 +104,7 @@ namespace RedisHelper.Common
         /// <returns></returns>
         public long DecrBy(string key, int count)
         {
-            return BaseRedisOperatHelper.redis_client.DecrementValueBy(key, count);
+            return redis_client.DecrementValueBy(key, count);
         }
 
 

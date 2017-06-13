@@ -96,6 +96,7 @@ namespace RedisHelper.Common
             #endregion
             CreateManager();
             //3 通过缓存连接池获取Redis客户端对象，并赋给本类中定义的私有变量
+            //通过单例模式创建redis客户端对象
             if (redis_client == null)
             {
                 lock (_locker)
